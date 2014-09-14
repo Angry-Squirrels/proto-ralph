@@ -14,13 +14,15 @@ class Entity extends Sprite
 	public var hitPoints : UInt;
 	public var maxHitPoint : UInt;
 	
-	public var body : Body;
+	public var body(get_body, set_body): Body;
 	public var invulnerable : Bool;
 	public var group : GroupName;
 	
 	// linked list of entity for performance
 	public var next : Entity;
 	public var prev : Entity;
+	
+	var mBody : Body;
 
 	public function new() 
 	{
@@ -46,6 +48,16 @@ class Entity extends Sprite
 	
 	public function onDestroy() {
 		
+	}
+	
+	public function set_body(body : Body) : Body {
+		mBody = body;
+		mBody.userData.entity = this;
+		return mBody;
+	}
+	
+	public function get_body() : Body {
+		return mBody;
 	}
 	
 	public function dispose() {
