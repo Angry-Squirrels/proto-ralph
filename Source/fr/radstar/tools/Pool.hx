@@ -6,24 +6,24 @@ package fr.radstar.tools;
  */
 class Pool
 {
-	var mpool:Map < Class, Array<IPoolable> > ;
+	var mpool:Map < String, Array<IPoolable> > ;
 	
 	public function new() 
 	{
-		mpool = new Map < Class, Array<IPoolable> > ();
+		mpool = new Map < String, Array<IPoolable> > ();
 	}
 	
-	public function getItem(className:Class):IPoolable
+	public function getItem(className:String):IPoolable
 	{
-		if (mpool[className] == null)
+		if (!mpool.exists(className))
 		{
-			mpool[className] = new Array<IPoolable>();
+			mpool.set(className, new Array<IPoolable>());
 		}
-		var array:Array<IPoolable> = mpool[className];
+		var array:Array<IPoolable> = mpool.get(className);
 		
 		if (array.length == 0)
 		{
-			return Type.createInstance<className>();
+			return Type.createEmptyInstance(Type.resolveClass(className));
 		}
 		else
 		{
@@ -34,11 +34,11 @@ class Pool
 	public function freeItem(item:IPoolable):Void
 	{
 		item.free();
-		var className:Class = Type.getClass(item);
+		var className:String = Type.getClassName(Type.getClass(item));
 		
-		if (mpool[className] == null)
+		if (!mpool.exists(className))
 		{
-			mpool[className] = new Array<IPoolable>();
+			mpool.set(className, new Array<IPoolable>());
 		}
 		mpool[className].push(item);
 	}
