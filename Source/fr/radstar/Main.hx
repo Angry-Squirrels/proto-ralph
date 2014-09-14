@@ -11,8 +11,6 @@ class Main extends Sprite {
 		
 		super ();
 		
-		
-		
 	}
 	
 	
