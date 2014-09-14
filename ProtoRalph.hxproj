@@ -16,10 +16,10 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,1" />
+    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1" />
     <class path="E:\Outils\Dev\Haxe\haxe\lib\nape\2,0,16" />
     <class path="Source" />
-    <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,1\backends\flash" />
+    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1\backends\flash" />
     <class path="Export\flash\haxe" />
   </classpaths>
   <!-- Build options -->

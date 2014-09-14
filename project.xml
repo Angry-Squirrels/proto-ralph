@@ -2,7 +2,7 @@
 <project>
 	
 	<meta title="ProtoRalph" package="fr.radstar.protoralph" version="1.0.0" company="RadStar" />
-	<app main="fr.radstar.Main" path="Export" file="ProtoRalph" />
+	<app main="fr.radstar.protoralph.Main" path="Export" file="ProtoRalph" />
 	
 	<source path="Source" />
 	
