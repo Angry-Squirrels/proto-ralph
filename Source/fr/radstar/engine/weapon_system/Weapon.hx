@@ -1,4 +1,4 @@
-package fr.radstar.weapons;
+package fr.radstar.engine.weapons;
 import fr.radstar.engine.Entity;
 import openfl.display.Sprite;
 
@@ -8,8 +8,6 @@ import openfl.display.Sprite;
  */
 class Weapon extends Sprite
 {
-	
-
 	public function new() 
 	{
 		super();

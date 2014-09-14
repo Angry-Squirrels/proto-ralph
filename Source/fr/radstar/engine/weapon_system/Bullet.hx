@@ -1,6 +1,6 @@
-package fr.radstar.weapon_system;
+package fr.radstar.engine.weapon_system;
 import fr.radstar.engine.Entity;
-import fr.radstar.tools.IPoolable;
+import fr.radstar.engine.tools.IPoolable;
 import nape.phys.Body;
 
 /**
@@ -36,4 +36,20 @@ class Bullet extends Entity implements IPoolable
 		this.reset();
 	}
 	
+	function entityTouched(params:InteractionCallback):Void
+	{
+		try
+		{
+			var entity:Entity = cast(params.int2.castBody, Entity);
+			if (entity.group != this.group)
+			{
+				// spawn AOE
+				mAOE.fire();
+			}
+		}
+		catch (e:String)
+		{
+			
+		}
+	}
 }

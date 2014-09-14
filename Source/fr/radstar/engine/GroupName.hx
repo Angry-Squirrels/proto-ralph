@@ -8,5 +8,5 @@ package fr.radstar.engine ;
  @:enum
  abstract GroupName(Int) {
 	var Player = 0;
-	var Enemy = 0;
+	var Enemy = 1;
  }

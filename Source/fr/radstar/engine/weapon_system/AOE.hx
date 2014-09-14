@@ -1,6 +1,8 @@
-package fr.radstar.weapon_system;
+package fr.radstar.engine.weapon_system;
+import flash.geom.Point;
 import fr.radstar.engine.Entity;
-import fr.radstar.tools.IPoolable;
+import fr.radstar.engine.tools.IPoolable;
+import nape.callbacks.InteractionCallback;
 import nape.phys.Body;
 
 /**
@@ -37,4 +39,25 @@ class AOE extends Entity implements IPoolable
 		this.reset();
 	}
 	
+	public function fire():Void
+	{
+		
+	}
+	
+	function entityTouched(params:InteractionCallback):Void
+	{
+		try
+		{
+			var entity:Entity = cast(params.int2.castBody, Entity);
+			if (entity.group != this.group)
+			{
+				mEntitiesTouched.push(entity);
+				entity.onDamaged(mDamages);
+			}
+		}
+		catch (e:String)
+		{
+			
+		}
+	}
 }
