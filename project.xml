@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="ProtoRalph" package="com.example.protoralph" version="1.0.0" company="Company Name" />
-	<app main="Main" path="Export" file="ProtoRalph" />
+	<meta title="ProtoRalph" package="fr.radstar.protoralph" version="1.0.0" company="RadStar" />
+	<app main="fr.radstar.Main" path="Export" file="ProtoRalph" />
 	
 	<source path="Source" />
 	

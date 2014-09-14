@@ -1,4 +1,4 @@
-package;
+package fr.radstar ;
 
 
 import openfl.display.Sprite;
