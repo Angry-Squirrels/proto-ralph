@@ -10,7 +10,6 @@ import openfl.display.Sprite;
 class Entity extends Sprite
 {
 	
-	public var name : String;
 	public var hitPoints : UInt;
 	public var maxHitPoint : UInt;
 	
