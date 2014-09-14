@@ -1,5 +1,6 @@
 package fr.radstar;
 
+import nape.phys.Body;
 import openfl.display.Sprite;
 
 /**
@@ -13,7 +14,7 @@ class Entity extends Sprite
 	public var hitPoints : UInt;
 	public var maxHitPoint : UInt;
 	
-	public var body : 
+	public var body : Body;
 
 	public function new() 
 	{
