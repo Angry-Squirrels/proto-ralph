@@ -1,6 +1,6 @@
 package fr.radstar.engine.weapon_system;
-import flash.geom.Point;
 import fr.radstar.engine.Entity;
+import fr.radstar.engine.GroupName;
 import fr.radstar.engine.tools.IPoolable;
 import nape.callbacks.InteractionCallback;
 import nape.phys.Body;
@@ -21,17 +21,19 @@ class AOE extends Entity implements IPoolable
 		this.reset();
 	}
 	
-	public function init(damages:Int, lifeSpan:Int, body:Body, group:UInt):Void
+	public function init(damages:Int, lifeSpan:Int, body:Body, group:GroupName):Void
 	{
 		mDamages = damages;
 		mLifeSpan = lifeSpan;
 		
 		this.body = geom;
+		this.group = group;
 	}
 	
 	public function reset():Void
 	{
 		mEntitiesTouched = new Array<Entity>();
+		this.invulnerable = true;
 	}
 	
 	public function free():Void

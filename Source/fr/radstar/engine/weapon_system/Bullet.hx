@@ -1,6 +1,8 @@
 package fr.radstar.engine.weapon_system;
 import fr.radstar.engine.Entity;
+import fr.radstar.engine.GroupName;
 import fr.radstar.engine.tools.IPoolable;
+import nape.callbacks.InteractionCallback;
 import nape.phys.Body;
 
 /**
@@ -18,17 +20,18 @@ class Bullet extends Entity implements IPoolable
 		this.reset();
 	}
 	
-	public function init(lifeSpan:Int, aoe:AOE, body:Body):Void
+	public function init(lifeSpan:Int, aoe:AOE, body:Body, group:GroupName):Void
 	{
 		mLifeSpan = lifeSpan;
 		mAOE = aoe;
 		
 		this.body = body;
+		this.group = group;
 	}
 	
 	public function reset():Void
 	{
-		
+		this.invulnerable = true;
 	}
 	
 	public function free():Void

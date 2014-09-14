@@ -7,10 +7,20 @@ package fr.radstar.engine.tools;
 class Pool
 {
 	var mPool:Map < String, Array<IPoolable> > ;
+	static var mInstance:Pool;
 	
 	public function new() 
 	{
 		mPool = new Map < String, Array<IPoolable> > ();
+	}
+	
+	public static function getInstance()
+	{
+		if (mInstance == null)
+		{
+			mInstance = new Pool();
+		}
+		return mInstance;
 	}
 	
 	public function getItem(className:String):IPoolable
