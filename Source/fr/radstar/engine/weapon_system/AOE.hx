@@ -13,7 +13,7 @@ class AOE extends Entity implements IPoolable
 {
 	var mEntitiesTouched:Array<Entity>;
 	var mDamages:Int;
-	var mLifeSpan:Int;
+	var mLifeSpan:Float;
 	
 	public function new() 
 	{
@@ -21,7 +21,7 @@ class AOE extends Entity implements IPoolable
 		this.reset();
 	}
 	
-	public function init(damages:Int, lifeSpan:Int, body:Body, group:GroupName):Void
+	public function init(damages:Int, lifeSpan:Float, body:Body, group:GroupName):Void
 	{
 		mDamages = damages;
 		mLifeSpan = lifeSpan;

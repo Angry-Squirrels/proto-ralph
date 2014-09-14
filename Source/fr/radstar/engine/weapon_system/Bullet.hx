@@ -11,7 +11,7 @@ import nape.phys.Body;
  */
 class Bullet extends Entity implements IPoolable
 {
-	var mLifeSpan:Int;
+	var mLifeSpan:Float;
 	var mAOE:AOE;
 
 	public function new() 
@@ -20,7 +20,7 @@ class Bullet extends Entity implements IPoolable
 		this.reset();
 	}
 	
-	public function init(lifeSpan:Int, aoe:AOE, body:Body, group:GroupName):Void
+	public function init(lifeSpan:Float, aoe:AOE, body:Body, group:GroupName):Void
 	{
 		mLifeSpan = lifeSpan;
 		mAOE = aoe;

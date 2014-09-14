@@ -14,7 +14,7 @@ class Pool
 		mPool = new Map < String, Array<IPoolable> > ();
 	}
 	
-	public static function getInstance()
+	public static function getInstance():Pool
 	{
 		if (mInstance == null)
 		{
