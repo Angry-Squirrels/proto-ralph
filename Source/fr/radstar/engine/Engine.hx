@@ -38,13 +38,14 @@ class Engine extends Sprite
 	
 	function update(delta : Float) {
 		if (mCurrentScene != null)
-			mCurrentScene.update(delta);
+			mCurrentScene.mainUpdate(delta);
 	}
 	
-	function gotoScene(scene : Scene) {
+	public function gotoScene(scene : Scene) {
 		if (mCurrentScene != null)
 			mCurrentScene.stop();
 		mCurrentScene = scene;
+		addChild(mCurrentScene);
 		mCurrentScene.play();
 	}
 	

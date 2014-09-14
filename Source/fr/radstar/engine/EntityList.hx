@@ -1,4 +1,6 @@
 package fr.radstar.engine ;
+import openfl.events.Event;
+import openfl.events.EventDispatcher;
 
 /**
  * ...
@@ -6,7 +8,6 @@ package fr.radstar.engine ;
  */
 class EntityList
 {
-	
 	public var first : Entity;
 	public var last : Entity;
 
