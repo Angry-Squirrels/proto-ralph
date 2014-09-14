@@ -11,6 +11,7 @@ class Main extends Sprite {
 		
 		super ();
 		
+		addChild(Engine.getInstance());
 	}
 	
 	

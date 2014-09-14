@@ -7,6 +7,7 @@ import openfl.display.Sprite;
  * ...
  * @author TBaudon
  */
+ 
 class Entity extends Sprite
 {
 	
@@ -14,6 +15,12 @@ class Entity extends Sprite
 	public var maxHitPoint : UInt;
 	
 	public var body : Body;
+	public var invulnerable : Bool;
+	public var group : GroupName;
+	
+	// linked list of entity for performance
+	public var next : Entity;
+	public var prev : Entity;
 
 	public function new() 
 	{
@@ -29,6 +36,7 @@ class Entity extends Sprite
 	}
 	
 	public function onDamaged(damage : UInt) {
+		if (invulnerable) return;
 		hitPoints -= damage;
 		if (hitPoints <= 0) {
 			hitPoints = 0;
