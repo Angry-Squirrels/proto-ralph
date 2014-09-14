@@ -1,5 +1,6 @@
 package fr.radstar.engine ;
 
+import fr.radstar.engine.tools.IPoolable;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import openfl.display.Sprite;
@@ -10,7 +11,7 @@ import openfl.events.Event;
  * @author TBaudon
  */
  
-class Entity extends Sprite
+class Entity extends Sprite implements IPoolable
 {
 	
 	public var hitPoints : UInt;
@@ -107,7 +108,7 @@ class Entity extends Sprite
 		return mBody;
 	}
 	
-	public function dispose() {
+	public function free() {
 		name = "";
 		hitPoints = 0;
 		maxHitPoint = 0;
