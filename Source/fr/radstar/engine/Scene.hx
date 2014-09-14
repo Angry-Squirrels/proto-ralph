@@ -27,7 +27,7 @@ class Scene extends Sprite
 		if (!mPaused) {
 			var entity = mEntities.first;
 			while (entity != null) {
-				entity.update(delta);
+				entity.mainUpdate(delta);
 				entity = entity.next;
 			}
 			
@@ -51,15 +51,15 @@ class Scene extends Sprite
 	}
 	
 	public function play() {
-		
+		mPaused = false;
 	}
 	
 	public function pause() {
-		
+		mPaused = true;
 	}
 	
 	public function stop() {
-		
+		mPaused = false;
 	}
 	
 }

@@ -4,6 +4,8 @@
 	<meta title="ProtoRalph" package="fr.radstar.protoralph" version="1.0.0" company="RadStar" />
 	<app main="fr.radstar.protoralph.Main" path="Export" file="ProtoRalph" />
 	
+	<window width="800" height="480" framerate="60" />
+	
 	<source path="Source" />
 	
 	<haxelib name="openfl" />

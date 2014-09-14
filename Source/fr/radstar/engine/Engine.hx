@@ -1,4 +1,8 @@
 package fr.radstar.engine ;
+import nape.geom.Vec2;
+import nape.space.Space;
+import nape.util.BitmapDebug;
+import nape.util.Debug;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.Lib;
@@ -21,9 +25,20 @@ class Engine extends Sprite
 	var mLastTime : Int;
 	var mCurrentScene : Scene;
 	
+	var mSpace : Space;
+	var mDebug : Debug;
+	
 	function new() 
 	{
 		super();
+		
+		mSpace = new Space(Vec2.weak(0, 10));
+		
+		#if debug
+		mDebug = new BitmapDebug(Lib.current.stage.stageWidth, Lib.current.stage.stageHeight, 0, true);
+		addChild(mDebug.display);
+		#end
+		
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
 	}
 	
@@ -39,6 +54,17 @@ class Engine extends Sprite
 	function update(delta : Float) {
 		if (mCurrentScene != null)
 			mCurrentScene.mainUpdate(delta);
+		mSpace.step(delta);
+		
+		#if debug
+		mDebug.clear();
+		mDebug.draw(mSpace);
+		mDebug.flush();
+		#end
+	}
+	
+	public function getSpace() : Space {
+		return mSpace;
 	}
 	
 	public function gotoScene(scene : Scene) {
