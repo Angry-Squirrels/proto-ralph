@@ -1,6 +1,7 @@
 package fr.radstar.weapon_system;
 import fr.radstar.Entity;
 import fr.radstar.tools.IPoolable;
+import nape.phys.Body;
 
 /**
  * ...
@@ -8,10 +9,31 @@ import fr.radstar.tools.IPoolable;
  */
 class Bullet extends Entity implements IPoolable
 {
+	var mLifeSpan:Int;
+	var mAOE:AOE;
 
 	public function new() 
 	{
+		super();
+		this.reset();
+	}
+	
+	public function init(lifeSpan:Int, aoe:AOE, body:Body):Void
+	{
+		mLifeSpan = lifeSpan;
+		mAOE = aoe;
 		
+		this.body = body;
+	}
+	
+	public function reset():Void
+	{
+		
+	}
+	
+	public function free():Void
+	{
+		this.reset();
 	}
 	
 }

@@ -12,7 +12,7 @@ class Weapon extends Sprite
 
 	public function new() 
 	{
-		
+		super();
 	}
 	
 	public function onUsed(_user:Entity)

@@ -1,6 +1,7 @@
 package fr.radstar.weapon_system;
 import fr.radstar.Entity;
 import fr.radstar.tools.IPoolable;
+import nape.phys.Body;
 
 /**
  * ...
@@ -8,18 +9,32 @@ import fr.radstar.tools.IPoolable;
  */
 class AOE extends Entity implements IPoolable
 {
-	private var entitiesTouched:Array<Entity>;
+	var mEntitiesTouched:Array<Entity>;
+	var mDamages:Int;
+	var mLifeSpan:Int;
 	
 	public function new() 
 	{
-		reset();
+		super();
+		this.reset();
 	}
 	
-	public function reset()
+	public function init(damages:Int, lifeSpan:Int, body:Body, group:UInt):Void
 	{
-		entitiesTouched = new Array<Entity>();
+		mDamages = damages;
+		mLifeSpan = lifeSpan;
+		
+		this.body = geom;
 	}
 	
+	public function reset():Void
+	{
+		mEntitiesTouched = new Array<Entity>();
+	}
 	
+	public function free():Void
+	{
+		this.reset();
+	}
 	
 }
