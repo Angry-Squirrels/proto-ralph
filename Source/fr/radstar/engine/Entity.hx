@@ -68,7 +68,7 @@ class Entity extends Sprite implements IPoolable
 		if (mBody != null) {
 			x = mBody.position.x - pivotX;
 			y = mBody.position.y - pivotY;
-			rotation = mBody.rotation;
+			rotation = mBody.rotation * 180 / Math.PI;
 		}
 	}
 	
@@ -104,7 +104,7 @@ class Entity extends Sprite implements IPoolable
 		mBody.userData.entity = this;
 		
 		mBody.position.set(Vec2.weak(x+pivotX, y+pivotY));
-		mBody.rotation = rotation;
+		mBody.rotation = Math.PI/180 * rotation;
 		
 		if(stage != null)
 			mBody.space = Engine.getInstance().getSpace();

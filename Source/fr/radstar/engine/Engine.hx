@@ -6,6 +6,7 @@ import nape.util.Debug;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.Lib;
+import openfl.ui.Keyboard;
 
 /**
  * ...
@@ -52,9 +53,11 @@ class Engine extends Sprite
 	}
 	
 	function update(delta : Float) {
+		
+		mSpace.step(delta);
+		
 		if (mCurrentScene != null)
 			mCurrentScene.mainUpdate(delta);
-		mSpace.step(delta);
 		
 		#if debug
 		mDebug.clear();

@@ -12,10 +12,20 @@ class Scene extends Sprite
 	var mEntitiesToRemove : Array<Entity>;
 	
 	var mPaused : Bool;
-
+	
+	var mGameWorld : Sprite;
+	
+	var mCamera : Camera;
+	
 	public function new() 
 	{
 		super();
+		
+		mCamera = new Camera(0,0);
+		addChild(mCamera);
+		
+		mGameWorld = new Sprite();
+		addChild(mGameWorld);
 		
 		mEntities = new EntityList();
 		mEntitiesToRemove = new Array<Entity>();
@@ -32,9 +42,14 @@ class Scene extends Sprite
 			}
 			
 			update(delta);
+			
+			mCamera.mainUpdate(delta);
 		
-			while (mEntitiesToRemove.length > 0)
-				removeChild(mEntitiesToRemove.shift());
+			while (mEntitiesToRemove.length > 0) {
+				var ent = mEntitiesToRemove.shift();
+				mGameWorld.removeChild(ent);
+				mEntities.remove(ent);
+			}
 		}
 	}
 	
@@ -43,7 +58,7 @@ class Scene extends Sprite
 	
 	public function add(ent : Entity) {
 		mEntities.add(ent);
-		addChild(ent);
+		mGameWorld.addChild(ent);
 	}
 	
 	public function remove(ent : Entity) {
