@@ -21,15 +21,23 @@ class Entity extends Sprite implements IPoolable
 	public var invulnerable : Bool;
 	public var group : GroupName;
 	
+	public var pivotX : Float;
+	public var pivotY : Float;
+	
 	// linked list of entity for performance
 	public var next : Entity;
 	public var prev : Entity;
+	
+	// private 
 	
 	var mBody : Body;
 
 	public function new() 
 	{
 		super();
+		
+		pivotX = 0;
+		pivotY = 0;
 		
 		addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
@@ -48,18 +56,18 @@ class Entity extends Sprite implements IPoolable
 	}
 	
 	public function setPos(x : Float, y : Float) {
-		this.x = x;
-		this.y = y;
+		this.x = x - pivotX;
+		this.y = y - pivotY;
 		
 		if (mBody != null) {
-			mBody.position.set(Vec2.weak(x, y));
+			mBody.position.set(Vec2.weak(x+pivotX, y+pivotY));
 		}
 	}
 	
 	public function updatePhysic() {
 		if (mBody != null) {
-			x = mBody.position.x;
-			y = mBody.position.y;
+			x = mBody.position.x - pivotX;
+			y = mBody.position.y - pivotY;
 			rotation = mBody.rotation;
 		}
 	}
@@ -95,7 +103,7 @@ class Entity extends Sprite implements IPoolable
 		mBody = body;
 		mBody.userData.entity = this;
 		
-		mBody.position.set(Vec2.weak(x, y));
+		mBody.position.set(Vec2.weak(x+pivotX, y+pivotY));
 		mBody.rotation = rotation;
 		
 		if(stage != null)

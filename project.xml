@@ -12,6 +12,8 @@
 	<haxelib name="nape" />
 	
 	<assets path="Assets" rename="assets" exclude="openfl.svg" />
+	<assets path="Assets/img" rename="img" />
+	
 	<icon path="Assets/openfl.svg" />
 	
 </project>

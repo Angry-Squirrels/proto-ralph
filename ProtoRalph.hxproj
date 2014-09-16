@@ -7,7 +7,7 @@
     <movie path="project.xml" />
     <movie fps="30" />
     <movie width="800" />
-    <movie height="600" />
+    <movie height="480" />
     <movie version="3" />
     <movie minorVersion="0" />
     <movie platform="NME" />
@@ -16,10 +16,10 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,1" />
-    <class path="C:\HaxeToolkit\haxe\lib\nape\2,0,16" />
+    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1" />
+    <class path="E:\Outils\Dev\Haxe\haxe\lib\nape\2,0,16" />
     <class path="Source" />
-    <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,1\backends\flash" />
+    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1\backends\flash" />
     <class path="Export\flash\haxe" />
   </classpaths>
   <!-- Build options -->

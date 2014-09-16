@@ -23,8 +23,9 @@ class Pool
 		return mInstance;
 	}
 	
-	public function getItem(className:String):IPoolable
+	public function getItem(itemClass:Class<Dynamic>):IPoolable
 	{
+		var className = Type.getClassName(itemClass);
 		if (!mPool.exists(className))
 		{
 			mPool.set(className, new Array<IPoolable>());

@@ -1,4 +1,4 @@
-package fr.radstar.engine.weapons;
+package fr.radstar.engine.weapon ;
 import fr.radstar.engine.Entity;
 import openfl.display.Sprite;
 
@@ -13,7 +13,7 @@ class Weapon extends Sprite
 		super();
 	}
 	
-	public function onUsed(_user:Entity)
+	public function use(_user:Entity)
 	{
 		
 	}

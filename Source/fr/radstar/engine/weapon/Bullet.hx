@@ -1,4 +1,4 @@
-package fr.radstar.engine.weapon_system;
+package fr.radstar.engine.weapon ;
 import fr.radstar.engine.Entity;
 import fr.radstar.engine.GroupName;
 import fr.radstar.engine.tools.IPoolable;

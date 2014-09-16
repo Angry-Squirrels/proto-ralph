@@ -32,7 +32,7 @@ class Engine extends Sprite
 	{
 		super();
 		
-		mSpace = new Space(Vec2.weak(0, 10));
+		mSpace = new Space(Vec2.weak(0, 9.80));
 		
 		#if debug
 		mDebug = new BitmapDebug(Lib.current.stage.stageWidth, Lib.current.stage.stageHeight, 0, true);

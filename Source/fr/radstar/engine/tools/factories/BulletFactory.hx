@@ -1,6 +1,6 @@
 package fr.radstar.engine.tools.factories;
 import fr.radstar.engine.GroupName;
-import fr.radstar.engine.weapon_system.Bullet;
+import fr.radstar.engine.weapon.Bullet;
 import fr.radstar.engine.tools.Pool;
 import nape.phys.Body;
 import nape.phys.BodyType;
