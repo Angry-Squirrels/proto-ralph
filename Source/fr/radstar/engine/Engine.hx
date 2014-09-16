@@ -40,6 +40,8 @@ class Engine extends Sprite
 		addChild(mDebug.display);
 		#end
 		
+		mLastTime = Lib.getTimer();
+		
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
 	}
 	
@@ -49,11 +51,12 @@ class Engine extends Sprite
 		var delta = time - mLastTime;
 		mLastTime = time;
 		
-		update(cast time / 1000);
+		trace(delta);
+		
+		update(cast delta / 1000);
 	}
 	
 	function update(delta : Float) {
-		
 		mSpace.step(delta);
 		
 		if (mCurrentScene != null)
@@ -61,7 +64,7 @@ class Engine extends Sprite
 		
 		#if debug
 		mDebug.clear();
-		mDebug.draw(mSpace);
+		//mDebug.draw(mSpace);
 		mDebug.flush();
 		#end
 	}

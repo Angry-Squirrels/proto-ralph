@@ -1,9 +1,14 @@
 package fr.radstar.protoralph.scenes;
+import flash.events.Event;
 import fr.radstar.engine.Camera;
 import fr.radstar.engine.Scene;
+import fr.radstar.protoralph.entities.Bady;
+import fr.radstar.protoralph.entities.Crate;
 import fr.radstar.protoralph.entities.Player;
 import fr.radstar.protoralph.entities.Wall;
 import nape.geom.Vec2;
+import openfl.events.MouseEvent;
+import openfl.Lib;
 
 /**
  * ...
@@ -20,11 +25,17 @@ class Test extends Scene
 		super();
 		
 		var wall = new Wall(800, 20);
+		
 		var wall2 = new Wall(480, 20);
 		wall2.rotation = 90;
 		wall2.x = 20;
+		
 		var wall3 = new Wall(800, 20);
+		wall3.y = 460;
+		
 		var wall4 = new Wall(480, 20);
+		wall4.rotation = 90;
+		wall4.x = 800;
 		
 		mHero = new Player();
 		mHero.x = 400;
@@ -39,9 +50,31 @@ class Test extends Scene
 		add(wall3);
 		add(wall4);
 		
-		mHero.body.applyImpulse(Vec2.weak(-10, 0));
-		
 		mTime = 0;
+		
+		for (i in 0 ... 500) {
+			var bad = new Bady();
+			bad.x = 30 + Math.random() * 740;
+			bad.y = 30 + Math.random() * 420;
+			add(bad);
+		}
+		
+		for (i in 0 ... 10) {
+			var bad = new Crate();
+			bad.x = 30 + Math.random() * 740;
+			bad.y = 30 + Math.random() * 420;
+			add(bad);
+		}
+		
+		Lib.current.stage.addEventListener(MouseEvent.CLICK, onWorldClicked);
+	}
+	
+	private function onWorldClicked(e:MouseEvent):Void 
+	{
+		var tx = mGameWorld.mouseX;
+		var ty = mGameWorld.mouseY;
+		trace(tx, ty);
+		mHero.moveTo(tx, ty);
 	}
 	
 	override public function update(delta : Float) {
