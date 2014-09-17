@@ -52,14 +52,14 @@ class Test extends Scene
 		
 		mTime = 0;
 		
-		for (i in 0 ... 500) {
+		for (i in 0 ... 100) {
 			var bad = new Bady();
 			bad.x = 30 + Math.random() * 740;
 			bad.y = 30 + Math.random() * 420;
 			add(bad);
 		}
 		
-		for (i in 0 ... 10) {
+		for (i in 0 ... 25) {
 			var bad = new Crate();
 			bad.x = 30 + Math.random() * 740;
 			bad.y = 30 + Math.random() * 420;

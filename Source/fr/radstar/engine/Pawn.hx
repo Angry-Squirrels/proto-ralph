@@ -1,5 +1,4 @@
 package fr.radstar.engine;
-import fr.radstar.engine.IState.State;
 
 /**
  * ...
@@ -10,9 +9,9 @@ class Pawn extends Actor
 	
 	public var player : Int;
 
-	public function new(baseState : State, grp : GroupName) 
+	public function new(grp : GroupName) 
 	{
-		super(baseState, grp);
+		super(grp);
 	}
 	
 	

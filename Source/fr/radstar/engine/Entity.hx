@@ -24,6 +24,8 @@ class Entity extends Sprite implements IPoolable
 	public var pivotX : Float;
 	public var pivotY : Float;
 	
+	public var friction : Float = 0.95;
+	
 	// linked list of entity for performance
 	public var next : Entity;
 	public var prev : Entity;
@@ -64,11 +66,20 @@ class Entity extends Sprite implements IPoolable
 		}
 	}
 	
-	public function updatePhysic() {
+	public function updatePhysic(delta : Float) {
 		if (mBody != null) {
 			x = mBody.position.x - pivotX;
 			y = mBody.position.y - pivotY;
 			rotation = mBody.rotation * 180 / Math.PI;
+			
+			if(mBody.velocity.length > 0.0001 || mBody.angularVel > 0.001){
+				mBody.velocity.set(mBody.velocity.mul(friction));
+				mBody.angularVel = mBody.angularVel * friction;
+			}
+			else{
+				mBody.velocity.set(Vec2.weak(0, 0));
+				mBody.angularVel = 0;
+			}
 		}
 	}
 	
@@ -78,7 +89,7 @@ class Entity extends Sprite implements IPoolable
 	
 	@:final
 	public function mainUpdate(delta : Float) {
-		updatePhysic();
+		updatePhysic(delta);
 		update(delta);
 	}
 	

@@ -51,8 +51,6 @@ class Engine extends Sprite
 		var delta = time - mLastTime;
 		mLastTime = time;
 		
-		trace(delta);
-		
 		update(cast delta / 1000);
 	}
 	
@@ -76,6 +74,7 @@ class Engine extends Sprite
 	public function gotoScene(scene : Scene) {
 		if (mCurrentScene != null)
 			mCurrentScene.stop();
+		mSpace.clear();
 		mCurrentScene = scene;
 		addChild(mCurrentScene);
 		mCurrentScene.play();

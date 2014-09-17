@@ -14,6 +14,7 @@ class Scene extends Sprite
 	var mPaused : Bool;
 	
 	var mGameWorld : Sprite;
+	var mGuiLayer : Sprite;
 	
 	var mCamera : Camera;
 	
@@ -30,6 +31,9 @@ class Scene extends Sprite
 		mEntities = new EntityList();
 		mEntitiesToRemove = new Array<Entity>();
 		mPaused = true;
+		
+		mGuiLayer = new Sprite();
+		addChild(mGuiLayer);
 	}
 	
 	@:final

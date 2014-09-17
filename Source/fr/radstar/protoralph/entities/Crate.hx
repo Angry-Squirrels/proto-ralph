@@ -20,7 +20,8 @@ class Crate extends Entity
 		graphics.endFill();
 		
 		body = new Body(BodyType.DYNAMIC);
-		body.shapes.add(new Polygon(Polygon.rect(-15, -15, 30, 30)));
+		body.shapes.add(new Polygon(Polygon.rect( -15, -15, 30, 30)));
+		
 	}
 	
 }
