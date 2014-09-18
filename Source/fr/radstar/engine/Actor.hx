@@ -89,7 +89,7 @@ class Actor extends Entity
 	}
 	
 	public function canAttack(ent : Entity) : Bool{
-		return ent.group != group && ent.group != GroupName.ENVIRONMENT;
+		return ent.group != group && ent.group != GroupName.ENVIRONMENT && weapon.inRange(ent.body.position);
 	}
 	
 	public function equip(w: Weapon) {

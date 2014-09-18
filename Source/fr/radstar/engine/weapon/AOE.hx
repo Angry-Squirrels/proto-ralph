@@ -18,9 +18,15 @@ class AOE extends Entity implements IPoolable
 {
 	
 	var mDamages:Float;
+	
 	var mLifeSpan:Float;
 	var mLifeCounter : Float;
+	
+	var mFrequency : Float;
+	
 	var mOverlapping : BodyList;
+	
+	var mHitEntities : Map<Entity, Float>;
 	
 	public function new() 
 	{
@@ -29,10 +35,11 @@ class AOE extends Entity implements IPoolable
 		body = new Body(BodyType.STATIC);
 	}
 	
-	public function init(damages:Float, lifeSpan:Float, group:GroupName):Void
+	public function init(damages:Float, lifeSpan:Float, group:GroupName, freq : Float):Void
 	{
 		mDamages = damages;
 		mLifeSpan = lifeSpan;
+		mFrequency = freq;
 		
 		this.group = group;
 	}
@@ -41,9 +48,12 @@ class AOE extends Entity implements IPoolable
 	{
 		super.reset();
 		
+		mHitEntities = new Map<Entity, Float>();
+		
 		this.invulnerable = true;
 		mLifeCounter = 0;
 		mLifeSpan = 0;
+		mFrequency = 0;
 	}
 	
 	override public function update(delta : Float) {
@@ -57,16 +67,26 @@ class AOE extends Entity implements IPoolable
 		for (i in 0 ... mOverlapping.length) {
 			var current : Body = mOverlapping.at(i);
 			var entity : Entity = current.userData.entity;
-			if (entity != null) {
-				trace(group, entity.group);
+			if (entity != null) 
 				if (entity.group != group)
-					entity.takeDamage(mDamages);
-			}
+					applyDamage(entity, delta);
 		}
 	}
 	
-	public function fire():Void
-	{
+	function applyDamage(ent : Entity, time : Float) {
+		if (mHitEntities[ent] == null)
+			mHitEntities[ent] = mFrequency;
+			
+		if(mHitEntities[ent] >= mFrequency){
+			ent.takeDamage(mDamages);
+			mHitEntities[ent] = 0;
+			onEntityDamaged(ent);
+		}
+		
+		mHitEntities[ent] += time;
+	}
+	
+	function onEntityDamaged(ent : Entity) {
 		
 	}
 }

@@ -22,6 +22,6 @@ class Bady extends Actor
 		
 		body.shapes.add(new Circle(10));
 		
+		hitPoints = 5;
 	}
-	
 }

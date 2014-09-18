@@ -1,4 +1,5 @@
 package fr.radstar.protoralph.weapons;
+import fr.radstar.engine.Entity;
 import fr.radstar.engine.weapon.AOE;
 import nape.callbacks.InteractionType;
 import nape.shape.Circle;
@@ -21,5 +22,5 @@ class FistAoe extends AOE
 		graphics.beginFill(0x000000,0.3);
 		graphics.drawCircle(0, 0, 10);
 	}
-		
+	
 }

@@ -25,7 +25,7 @@ class Entity extends Sprite implements IPoolable
 	public var pivotX : Float;
 	public var pivotY : Float;
 	
-	public var friction : Float = 0.5;
+	public var friction : Float = 0.3;
 	
 	public var canFree : Bool;
 	

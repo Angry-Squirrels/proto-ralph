@@ -25,7 +25,7 @@ class BareFist extends Weapon
 	
 	override public function use() {
 		var aoe : FistAoe = cast mPool.getItem(FistAoe);
-		aoe.init(damage, 0.1, owner.group);
+		aoe.init(damage, 0.1, owner.group, 0.5);
 		
 		aoe.x = owner.x + Math.cos(owner.body.rotation) * 30;
 		aoe.y = owner.y + Math.sin(owner.body.rotation) * 30;

@@ -59,7 +59,7 @@ class Test extends Scene
 			bad.x = 30 + Math.random() * 740;
 			bad.y = 30 + Math.random() * 420;
 			add(bad);
-			bad.moveTo(Vec2.get(400,240));
+			//bad.moveTo(Vec2.get(400,240));
 		}
 		
 		for (i in 0 ... 10) {
@@ -82,7 +82,7 @@ class Test extends Scene
 			
 			var ent : Entity = e.target;
 			
-			if (mHero.canAttack(ent) && mHero.weapon.inRange(clickPos)) 
+			if (mHero.canAttack(ent)) 
 				mHero.attack(ent);
 			else
 				mHero.moveTo(clickPos);
