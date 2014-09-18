@@ -18,17 +18,17 @@ class BareFist extends Weapon
 		super();
 		
 		range = 50;
+		damage = 1;
 		
 		mPool = Pool.getInstance();
 	}
 	
 	override public function use() {
-		trace("Take my fist on your face !");
-		
 		var aoe : FistAoe = cast mPool.getItem(FistAoe);
-		aoe.init(5, 1, owner.group);
-		aoe.x = owner.x;
-		aoe.y = owner.y;
+		aoe.init(damage, 0.1, owner.group);
+		
+		aoe.x = owner.x + Math.cos(owner.body.rotation) * 30;
+		aoe.y = owner.y + Math.sin(owner.body.rotation) * 30;
 		
 		Engine.getInstance().getCurrentScene().add(aoe);
 	}

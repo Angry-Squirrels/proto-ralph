@@ -38,8 +38,9 @@ class Actor extends Entity
 		mMovingFriction = 0.2;
 	}
 	
-	public function attack() {
+	public function attack(ent : Entity) {
 		if (weapon != null) {
+			lookAt(ent.body.position);
 			weapon.use();
 		}
 	}
@@ -53,10 +54,16 @@ class Actor extends Entity
 		
 	}
 	
+	public function lookAt(pos : Vec2) {
+		var diff = pos.sub(body.position);
+		body.rotation = diff.angle;
+	}
+	
 	public function moveTo(target : Vec2) {
 		mTargetPos = target;
 		var pos = body.position;
 		var diff = target.sub(pos);
+		lookAt(mTargetPos);
 		mDistMin = diff.length;
 		
 		state = moveState;
@@ -81,7 +88,11 @@ class Actor extends Entity
 			
 	}
 	
-	public function giveWeapon(w: Weapon) {
+	public function canAttack(ent : Entity) : Bool{
+		return ent.group != group && ent.group != GroupName.ENVIRONMENT;
+	}
+	
+	public function equip(w: Weapon) {
 		weapon = w;
 		weapon.owner = this;
 	}

@@ -15,8 +15,8 @@ import openfl.events.Event;
 class Entity extends Sprite implements IPoolable
 {
 	
-	public var hitPoints : UInt;
-	public var maxHitPoint : UInt;
+	public var hitPoints : Float;
+	public var maxHitPoint : Float;
 	
 	public var body(get_body, set_body): Body;
 	public var invulnerable : Bool;
@@ -42,6 +42,9 @@ class Entity extends Sprite implements IPoolable
 	{
 		reset();
 		super();
+		
+		hitPoints = 1;
+		maxHitPoint = 1;
 		
 		addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
@@ -110,7 +113,7 @@ class Entity extends Sprite implements IPoolable
 		
 	}
 	
-	public function takeDamage(damage : UInt) {
+	public function takeDamage(damage : Float) {
 		if (invulnerable) return;
 		hitPoints -= damage;
 		if (hitPoints <= 0) {
@@ -120,7 +123,7 @@ class Entity extends Sprite implements IPoolable
 	}
 	
 	public function onDestroy() {
-		
+		kill();
 	}
 	
 	public function set_body(body : Body) : Body {

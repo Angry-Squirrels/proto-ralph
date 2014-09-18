@@ -14,12 +14,12 @@ class FistAoe extends AOE
 	{
 		super();
 		
-		var shape : Circle = new Circle(20);
+		var shape : Circle = new Circle(10);
 		shape.sensorEnabled = true;
 		body.shapes.add(shape);
 		
-		graphics.beginFill(0xff0000);
-		graphics.drawCircle(0, 0, 20);
+		graphics.beginFill(0x000000,0.3);
+		graphics.drawCircle(0, 0, 10);
 	}
 		
 }

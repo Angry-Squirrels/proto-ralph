@@ -78,10 +78,15 @@ class Test extends Scene
 		var clickPos = Vec2.get( mGameWorld.mouseX, mGameWorld.mouseY);
 		
 		if (Std.is(e.target, Entity))
-			if (mHero.weapon.inRange(clickPos)) 
-				mHero.attack();
+		{
+			
+			var ent : Entity = e.target;
+			
+			if (mHero.canAttack(ent) && mHero.weapon.inRange(clickPos)) 
+				mHero.attack(ent);
 			else
 				mHero.moveTo(clickPos);
+		}
 		else
 			mHero.moveTo(clickPos);
 	}

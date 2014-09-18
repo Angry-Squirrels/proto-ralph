@@ -13,6 +13,7 @@ class Weapon extends Sprite
 	
 	public var range : Float;
 	public var owner : Entity;
+	public var damage : Float;
 	
 	public function new() 
 	{

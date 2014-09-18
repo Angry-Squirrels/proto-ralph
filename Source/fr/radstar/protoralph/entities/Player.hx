@@ -25,9 +25,13 @@ class Player extends Pawn
 		graphics.drawCircle(0, 0, 20);
 		graphics.endFill();
 		
+		graphics.lineStyle(2, 0);
+		graphics.moveTo(0, 0);
+		graphics.lineTo(20, 0);
+		
 		body.shapes.add(new Circle(20));
 		
-		giveWeapon(new BareFist());
+		equip(new BareFist());
 	}
 	
 }

@@ -1,5 +1,6 @@
 package fr.radstar.protoralph.entities;
 import fr.radstar.engine.Entity;
+import fr.radstar.engine.GroupName;
 import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.shape.Polygon;
@@ -15,6 +16,8 @@ class Wall extends Entity
 	public function new(w : Float, h : Float) 
 	{
 		super();
+		
+		group = GroupName.ENVIRONMENT;
 		
 		body = new Body(BodyType.STATIC);
 		body.shapes.add(new Polygon(Polygon.rect(0, 0, w, h)));

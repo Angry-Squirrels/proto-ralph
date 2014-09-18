@@ -3,6 +3,7 @@ import fr.radstar.engine.Entity;
 import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.shape.Polygon;
+import fr.radstar.engine.GroupName;
 
 /**
  * ...
@@ -14,6 +15,8 @@ class Crate extends Entity
 	public function new() 
 	{
 		super();
+		
+		group = GroupName.DESTRUCTIBLE;
 		
 		graphics.beginFill(0x66cc33);
 		graphics.drawRect(-15, -15, 30, 30);

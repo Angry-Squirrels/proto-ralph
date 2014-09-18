@@ -17,7 +17,7 @@ import nape.phys.BodyType;
 class AOE extends Entity implements IPoolable
 {
 	
-	var mDamages:Int;
+	var mDamages:Float;
 	var mLifeSpan:Float;
 	var mLifeCounter : Float;
 	var mOverlapping : BodyList;
@@ -29,7 +29,7 @@ class AOE extends Entity implements IPoolable
 		body = new Body(BodyType.STATIC);
 	}
 	
-	public function init(damages:Int, lifeSpan:Float, group:GroupName):Void
+	public function init(damages:Float, lifeSpan:Float, group:GroupName):Void
 	{
 		mDamages = damages;
 		mLifeSpan = lifeSpan;
@@ -54,6 +54,15 @@ class AOE extends Entity implements IPoolable
 			kill();
 		
 		mOverlapping = mBody.interactingBodies(InteractionType.SENSOR);
+		for (i in 0 ... mOverlapping.length) {
+			var current : Body = mOverlapping.at(i);
+			var entity : Entity = current.userData.entity;
+			if (entity != null) {
+				trace(group, entity.group);
+				if (entity.group != group)
+					entity.takeDamage(mDamages);
+			}
+		}
 	}
 	
 	public function fire():Void
