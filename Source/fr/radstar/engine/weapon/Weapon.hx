@@ -8,6 +8,9 @@ import openfl.display.Sprite;
  */
 class Weapon extends Sprite
 {
+	
+	public var range : Float;
+	
 	public function new() 
 	{
 		super();
