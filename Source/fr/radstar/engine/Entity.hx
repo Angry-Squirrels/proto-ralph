@@ -24,7 +24,7 @@ class Entity extends Sprite implements IPoolable
 	public var pivotX : Float;
 	public var pivotY : Float;
 	
-	public var friction : Float = 0.95;
+	public var friction : Float = 0.5;
 	
 	// linked list of entity for performance
 	public var next : Entity;
@@ -73,12 +73,11 @@ class Entity extends Sprite implements IPoolable
 			rotation = mBody.rotation * 180 / Math.PI;
 			
 			if(mBody.velocity.length > 0.0001 || mBody.angularVel > 0.001){
-				mBody.velocity.set(mBody.velocity.mul(friction));
-				mBody.angularVel = mBody.angularVel * friction;
-			}
-			else{
-				mBody.velocity.set(Vec2.weak(0, 0));
-				mBody.angularVel = 0;
+				//mBody.velocity.set(mBody.velocity.mul(friction));
+				//mBody.angularVel = mBody.angularVel * friction;
+				
+				mBody.applyImpulse(mBody.velocity.mul( -1 * friction));
+				mBody.angularVel *= friction;
 			}
 		}
 	}

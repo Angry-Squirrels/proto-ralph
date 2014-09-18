@@ -1,4 +1,5 @@
 package fr.radstar.engine;
+import flash.display.BitmapData;
 import fr.radstar.engine.weapon.Weapon;
 import nape.constraint.Constraint;
 import nape.geom.Vec2;
@@ -15,11 +16,15 @@ class Actor extends Entity
 	public var weapon : Weapon;
 	public var state : Float -> Void;
 	
-	public var speed : Float = 10000;
-	public var acceleration : Float = 100;
+	public var speed : Float = 250;
+	public var moveStrenght : Float = 25;
 	
 	var mTargetX : Float;
 	var mTargetY : Float;
+	var mDistMin : Float;
+	
+	var mIdleFriction : Float;
+	var mMovingFriction : Float;
 	
 	public function new(grp : GroupName) 
 	{
@@ -29,6 +34,9 @@ class Actor extends Entity
 		
 		state = baseState;
 		group = grp;
+		
+		mIdleFriction = friction;
+		mMovingFriction = 0.2;
 	}
 	
 	public function attack() {
@@ -50,7 +58,13 @@ class Actor extends Entity
 		mTargetX = x;
 		mTargetY = y;
 		
+		var target = Vec2.get(mTargetX, mTargetY);
+		var pos = body.position;
+		var diff = target.sub(pos);
+		mDistMin = diff.length;
+		
 		state = moveState;
+		friction = mMovingFriction;
 	}
 	
 	public function moveState(delta : Float) {
@@ -60,10 +74,13 @@ class Actor extends Entity
 		var diff = target.sub(pos);
 		var dist = diff.length;
 		
-		if (dist < body.velocity.length)
+		if (dist < body.velocity.length * delta) {
+			body.applyImpulse(body.velocity.mul( -1));
 			state = baseState;
+			friction = mIdleFriction;
+		}
 		else if (body.velocity.length < speed) {
-			var impulse = diff.normalise().mul(acceleration);
+			var impulse = diff.normalise().mul(moveStrenght);
 			body.applyImpulse(impulse);
 		}
 			

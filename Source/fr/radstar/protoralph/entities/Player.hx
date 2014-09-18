@@ -18,6 +18,8 @@ class Player extends Pawn
 	{
 		super(GroupName.Player);
 		
+		moveStrenght = 100;
+		
 		graphics.beginFill(0x0055cc);
 		graphics.drawCircle(0, 0, 20);
 		graphics.endFill();

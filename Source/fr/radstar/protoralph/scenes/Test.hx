@@ -52,14 +52,15 @@ class Test extends Scene
 		
 		mTime = 0;
 		
-		for (i in 0 ... 100) {
+		for (i in 0 ... 10) {
 			var bad = new Bady();
 			bad.x = 30 + Math.random() * 740;
 			bad.y = 30 + Math.random() * 420;
 			add(bad);
+			bad.moveTo(400, 240);
 		}
 		
-		for (i in 0 ... 25) {
+		for (i in 0 ... 10) {
 			var bad = new Crate();
 			bad.x = 30 + Math.random() * 740;
 			bad.y = 30 + Math.random() * 420;
@@ -73,7 +74,8 @@ class Test extends Scene
 	{
 		var tx = mGameWorld.mouseX;
 		var ty = mGameWorld.mouseY;
-		trace(tx, ty);
+
+		trace(e.target);
 		mHero.moveTo(tx, ty);
 	}
 	
