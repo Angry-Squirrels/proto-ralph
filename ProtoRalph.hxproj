@@ -5,7 +5,7 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="project.xml" />
-    <movie fps="30" />
+    <movie fps="60" />
     <movie width="800" />
     <movie height="480" />
     <movie version="3" />
@@ -16,20 +16,20 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1" />
-    <class path="E:\Outils\Dev\Haxe\haxe\lib\nape\2,0,16" />
+    <class path="C:\workspace\haxelib-dev\openfl" />
+    <class path="C:\outils\HaxeToolkit\haxe\lib\nape\2,0,16" />
     <class path="Source" />
-    <class path="E:\Outils\Dev\Haxe\haxe\lib\openfl\2,0,1\backends\html5" />
-    <class path="Export\html5\haxe" />
+    <class path="C:\workspace\haxelib-dev\openfl\backends\flash" />
+    <class path="Export\flash\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="openfl=2.0.1&#xA;nape=2.0.16&#xA;tools=1.5.7&#xA;openfl-html5&#xA;display&#xA;html5&#xA;web&#xA;html5" />
+    <option directives="openfl=2.0.1&#xA;nape=2.0.16&#xA;tools=1.5.7&#xA;openfl-flash&#xA;display&#xA;web" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;--remap flash:openfl&#xA;--macro allowPackage(&quot;flash&quot;)" />
+    <option additional="--no-output&#xA;-swf-version 11.2" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

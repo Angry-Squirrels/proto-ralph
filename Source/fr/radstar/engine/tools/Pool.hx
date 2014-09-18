@@ -26,31 +26,30 @@ class Pool
 	public function getItem(itemClass:Class<Dynamic>):IPoolable
 	{
 		var className = Type.getClassName(itemClass);
-		if (!mPool.exists(className))
-		{
-			mPool.set(className, new Array<IPoolable>());
-		}
-		var array:Array<IPoolable> = mPool.get(className);
+		
+		if (mPool[className] == null)
+			mPool[className] = new Array<IPoolable>();
+			
+		var array:Array<IPoolable> = mPool[className];
+		
+		var item : IPoolable;
 		
 		if (array.length == 0)
-		{
-			return Type.createEmptyInstance(Type.resolveClass(className));
-		}
+			item = Type.createInstance(Type.resolveClass(className), []);
 		else
-		{
-			return array.pop();
-		}
+			item = array.pop();
+		
+		return item;
 	}
 	
 	public function freeItem(item:IPoolable):Void
 	{
-		item.free();
+		item.reset();
 		var className:String = Type.getClassName(Type.getClass(item));
 		
-		if (!mPool.exists(className))
-		{
-			mPool.set(className, new Array<IPoolable>());
-		}
+		if (mPool[className] == null)
+			mPool[className] = new Array<IPoolable>();
+			
 		mPool[className].push(item);
 	}
 }

@@ -31,12 +31,20 @@ class EntityList
 	public function remove(ent : Entity) {
 		if (ent.prev == null && ent.next == null)
 			throw "not in the list";
+			
+		if (ent == last)
+			last = ent.prev;
+		if (ent == first)
+			first = ent.next;
 		
 		if (ent.prev != null)
 			ent.prev.next = ent.next;
 			
 		if (ent.next != null)
 			ent.next.prev = ent.prev;
+		
+		if (ent.canFree) 
+			ent.free();
 	}
 	
 }

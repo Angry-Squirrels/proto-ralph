@@ -65,7 +65,8 @@ class Scene extends Sprite
 		mGameWorld.addChild(ent);
 	}
 	
-	public function remove(ent : Entity) {
+	public function remove(ent : Entity, free : Bool = true) {
+		ent.canFree = free;
 		mEntitiesToRemove.push(ent);
 	}
 	

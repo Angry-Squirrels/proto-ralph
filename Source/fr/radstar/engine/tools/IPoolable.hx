@@ -6,5 +6,6 @@ package fr.radstar.engine.tools;
  */
 interface IPoolable
 {
+	function reset():Void;
 	function free():Void;
 }

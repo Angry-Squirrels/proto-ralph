@@ -2,6 +2,7 @@ package fr.radstar.protoralph.entities;
 
 import fr.radstar.engine.GroupName;
 import fr.radstar.engine.Pawn;
+import fr.radstar.protoralph.weapons.BareFist;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyType;
@@ -16,7 +17,7 @@ class Player extends Pawn
 
 	public function new() 
 	{
-		super(GroupName.Player);
+		super(GroupName.PLAYER);
 		
 		moveStrenght = 100;
 		
@@ -25,6 +26,8 @@ class Player extends Pawn
 		graphics.endFill();
 		
 		body.shapes.add(new Circle(20));
+		
+		giveWeapon(new BareFist());
 	}
 	
 }

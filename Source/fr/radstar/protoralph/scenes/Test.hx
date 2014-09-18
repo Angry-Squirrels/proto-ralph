@@ -1,6 +1,8 @@
 package fr.radstar.protoralph.scenes;
 import flash.events.Event;
 import fr.radstar.engine.Camera;
+import fr.radstar.engine.Engine;
+import fr.radstar.engine.Entity;
 import fr.radstar.engine.Scene;
 import fr.radstar.protoralph.entities.Bady;
 import fr.radstar.protoralph.entities.Crate;
@@ -57,7 +59,7 @@ class Test extends Scene
 			bad.x = 30 + Math.random() * 740;
 			bad.y = 30 + Math.random() * 420;
 			add(bad);
-			bad.moveTo(400, 240);
+			bad.moveTo(Vec2.get(400,240));
 		}
 		
 		for (i in 0 ... 10) {
@@ -72,11 +74,16 @@ class Test extends Scene
 	
 	private function onWorldClicked(e:MouseEvent):Void 
 	{
-		var tx = mGameWorld.mouseX;
-		var ty = mGameWorld.mouseY;
-
-		trace(e.target);
-		mHero.moveTo(tx, ty);
+		
+		var clickPos = Vec2.get( mGameWorld.mouseX, mGameWorld.mouseY);
+		
+		if (Std.is(e.target, Entity))
+			if (mHero.weapon.inRange(clickPos)) 
+				mHero.attack();
+			else
+				mHero.moveTo(clickPos);
+		else
+			mHero.moveTo(clickPos);
 	}
 	
 	override public function update(delta : Float) {

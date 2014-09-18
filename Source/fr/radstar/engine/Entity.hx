@@ -1,6 +1,7 @@
 package fr.radstar.engine ;
 
 import fr.radstar.engine.tools.IPoolable;
+import fr.radstar.engine.tools.Pool;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import openfl.display.Sprite;
@@ -26,6 +27,8 @@ class Entity extends Sprite implements IPoolable
 	
 	public var friction : Float = 0.5;
 	
+	public var canFree : Bool;
+	
 	// linked list of entity for performance
 	public var next : Entity;
 	public var prev : Entity;
@@ -33,16 +36,30 @@ class Entity extends Sprite implements IPoolable
 	// private 
 	
 	var mBody : Body;
+	var mFreeable : Bool;
 
 	public function new() 
 	{
+		reset();
 		super();
-		
-		pivotX = 0;
-		pivotY = 0;
 		
 		addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+	}
+	
+	public function reset():Void 
+	{
+		pivotX = 0;
+		pivotY = 0;
+		
+		next = null;
+		prev = null;
+		
+		name = "";
+		hitPoints = 0;
+		maxHitPoint = 0;
+		
+		canFree = false;
 	}
 	
 	function onRemovedFromStage(e:Event):Void 
@@ -73,9 +90,6 @@ class Entity extends Sprite implements IPoolable
 			rotation = mBody.rotation * 180 / Math.PI;
 			
 			if(mBody.velocity.length > 0.0001 || mBody.angularVel > 0.001){
-				//mBody.velocity.set(mBody.velocity.mul(friction));
-				//mBody.angularVel = mBody.angularVel * friction;
-				
 				mBody.applyImpulse(mBody.velocity.mul( -1 * friction));
 				mBody.angularVel *= friction;
 			}
@@ -126,11 +140,12 @@ class Entity extends Sprite implements IPoolable
 		return mBody;
 	}
 	
+	@:final
 	public function free() {
-		name = "";
-		hitPoints = 0;
-		maxHitPoint = 0;
-		mBody = null;
+		Pool.getInstance().freeItem(this);
 	}
 	
+	public function kill() {
+		Engine.getInstance().getCurrentScene().remove(this, true);
+	}
 }

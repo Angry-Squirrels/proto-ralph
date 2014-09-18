@@ -14,7 +14,7 @@ class Bady extends Actor
 
 	public function new() 
 	{
-		super(GroupName.Enemy);
+		super(GroupName.ENEMY);
 		
 		graphics.beginFill(0xcc5500);
 		graphics.drawCircle(0, 0, 10);

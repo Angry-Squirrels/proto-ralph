@@ -19,8 +19,7 @@ class Actor extends Entity
 	public var speed : Float = 250;
 	public var moveStrenght : Float = 25;
 	
-	var mTargetX : Float;
-	var mTargetY : Float;
+	var mTargetPos : Vec2;
 	var mDistMin : Float;
 	
 	var mIdleFriction : Float;
@@ -41,7 +40,7 @@ class Actor extends Entity
 	
 	public function attack() {
 		if (weapon != null) {
-			weapon.use(this);
+			weapon.use();
 		}
 	}
 	
@@ -54,11 +53,8 @@ class Actor extends Entity
 		
 	}
 	
-	public function moveTo(x : Float, y : Float) {
-		mTargetX = x;
-		mTargetY = y;
-		
-		var target = Vec2.get(mTargetX, mTargetY);
+	public function moveTo(target : Vec2) {
+		mTargetPos = target;
 		var pos = body.position;
 		var diff = target.sub(pos);
 		mDistMin = diff.length;
@@ -69,9 +65,8 @@ class Actor extends Entity
 	
 	public function moveState(delta : Float) {
 		
-		var target = Vec2.get(mTargetX, mTargetY);
 		var pos = body.position;
-		var diff = target.sub(pos);
+		var diff = mTargetPos.sub(pos);
 		var dist = diff.length;
 		
 		if (dist < body.velocity.length * delta) {
@@ -84,6 +79,11 @@ class Actor extends Entity
 			body.applyImpulse(impulse);
 		}
 			
+	}
+	
+	public function giveWeapon(w: Weapon) {
+		weapon = w;
+		weapon.owner = this;
 	}
 	
 }

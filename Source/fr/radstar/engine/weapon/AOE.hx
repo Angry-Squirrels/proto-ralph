@@ -2,8 +2,13 @@ package fr.radstar.engine.weapon ;
 import fr.radstar.engine.Entity;
 import fr.radstar.engine.GroupName;
 import fr.radstar.engine.tools.IPoolable;
+import nape.callbacks.CbEvent;
 import nape.callbacks.InteractionCallback;
+import nape.callbacks.InteractionListener;
+import nape.callbacks.InteractionType;
 import nape.phys.Body;
+import nape.phys.BodyList;
+import nape.phys.BodyType;
 
 /**
  * ...
@@ -11,55 +16,48 @@ import nape.phys.Body;
  */
 class AOE extends Entity implements IPoolable
 {
-	var mEntitiesTouched:Array<Entity>;
+	
 	var mDamages:Int;
 	var mLifeSpan:Float;
+	var mLifeCounter : Float;
+	var mOverlapping : BodyList;
 	
 	public function new() 
 	{
 		super();
-		this.reset();
+		
+		body = new Body(BodyType.STATIC);
 	}
 	
-	public function init(damages:Int, lifeSpan:Float, body:Body, group:GroupName):Void
+	public function init(damages:Int, lifeSpan:Float, group:GroupName):Void
 	{
 		mDamages = damages;
 		mLifeSpan = lifeSpan;
 		
-		this.body = geom;
 		this.group = group;
 	}
 	
-	public function reset():Void
+	override public function reset():Void
 	{
-		mEntitiesTouched = new Array<Entity>();
+		super.reset();
+		
 		this.invulnerable = true;
+		mLifeCounter = 0;
+		mLifeSpan = 0;
 	}
 	
-	public function free():Void
-	{
-		this.reset();
+	override public function update(delta : Float) {
+		super.update(delta);
+		mLifeCounter += delta;
+		
+		if (mLifeCounter >= mLifeSpan) 
+			kill();
+		
+		mOverlapping = mBody.interactingBodies(InteractionType.SENSOR);
 	}
 	
 	public function fire():Void
 	{
 		
-	}
-	
-	function entityTouched(params:InteractionCallback):Void
-	{
-		try
-		{
-			var entity:Entity = cast(params.int2.castBody, Entity);
-			if (entity.group != this.group)
-			{
-				mEntitiesTouched.push(entity);
-				entity.onDamaged(mDamages);
-			}
-		}
-		catch (e:String)
-		{
-			
-		}
 	}
 }

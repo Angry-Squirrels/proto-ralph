@@ -80,4 +80,8 @@ class Engine extends Sprite
 		mCurrentScene.play();
 	}
 	
+	public function getCurrentScene() : Scene {
+		return mCurrentScene;
+	}
+	
 }
