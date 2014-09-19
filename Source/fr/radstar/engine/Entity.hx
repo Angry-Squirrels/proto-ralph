@@ -2,6 +2,7 @@ package fr.radstar.engine ;
 
 import fr.radstar.engine.tools.IPoolable;
 import fr.radstar.engine.tools.Pool;
+import nape.geom.Geom;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import openfl.display.Sprite;
@@ -42,8 +43,8 @@ class Entity extends Sprite implements IPoolable
 
 	public function new() 
 	{
-		reset();
 		super();
+		reset();
 		
 		hitPoints = 1;
 		maxHitPoint = 1;
@@ -153,6 +154,21 @@ class Entity extends Sprite implements IPoolable
 			mBody.space = Engine.getInstance().getSpace();
 			
 		return mBody;
+	}
+	
+	public function getClosestInGroup(group : Array<Entity>) : Entity {
+		
+		var minDist : Float = Math.POSITIVE_INFINITY;
+		var closest : Entity = null;
+		for (entity in group) {
+			var dist = Geom.distanceBody(body, entity.body, Vec2.get(), Vec2.get());
+			if (dist < minDist) {
+				minDist = dist;
+				closest = entity;
+			}
+		}
+		
+		return closest;
 	}
 	
 	public function get_body() : Body {

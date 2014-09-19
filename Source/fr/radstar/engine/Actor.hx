@@ -97,7 +97,9 @@ class Actor extends Entity
 		var diff = mTargetPos.sub(pos);
 		var dist = diff.length;
 		
-		if (dist < body.velocity.length * delta) {
+		lookAt(mTargetPos);
+		
+		if (dist <= body.velocity.length * delta + 5) {
 			body.applyImpulse(body.velocity.mul( -1));
 			state = baseState;
 			friction = mIdleFriction;

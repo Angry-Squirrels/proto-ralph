@@ -11,6 +11,8 @@
 	<haxelib name="openfl" />
 	<haxelib name="nape" />
 	
+	<!--<template path="Templates"/>-->
+	
 	<assets path="Assets" rename="assets" exclude="openfl.svg" />
 	<assets path="Assets/img" rename="img" />
 	

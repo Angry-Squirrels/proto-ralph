@@ -10,6 +10,7 @@ import fr.radstar.protoralph.entities.Player;
 import fr.radstar.protoralph.entities.Wall;
 import nape.geom.Vec2;
 import openfl.events.MouseEvent;
+import openfl.events.TouchEvent;
 import openfl.Lib;
 
 /**
@@ -21,6 +22,7 @@ class Test extends Scene
 	
 	var mTime : Float;
 	var mHero : Player;
+	var mMouseDown : Bool;
 
 	public function new() 
 	{
@@ -70,9 +72,31 @@ class Test extends Scene
 		}
 		
 		Lib.current.stage.addEventListener(MouseEvent.CLICK, onWorldClicked);
+		Lib.current.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, onRightClick);
+		
+		Lib.current.stage.addEventListener(TouchEvent.TOUCH_TAP, onWorldClicked);
+		Lib.current.stage.addEventListener(TouchEvent.TOUCH_BEGIN, onWorldClicked);
 	}
 	
-	private function onWorldClicked(e:MouseEvent):Void 
+	private function onRightClick(e:Event):Void 
+	{
+		
+	}
+	
+	private function onMouseUp(e:Event):Void 
+	{
+		mMouseDown = false;
+	}
+	
+	private function onMouseDown(e:Event):Void 
+	{
+		if (!Std.is(e.target, Entity))
+			mMouseDown = true;
+	}
+	
+	private function onWorldClicked(e:Event):Void 
 	{
 		
 		var clickPos = Vec2.get( mGameWorld.mouseX, mGameWorld.mouseY);
@@ -81,6 +105,7 @@ class Test extends Scene
 		{
 			var ent : Entity = e.target;
 			mHero.interractWith(ent);
+			mMouseDown = false;
 		}
 		else
 			mHero.moveTo(clickPos);
@@ -90,7 +115,10 @@ class Test extends Scene
 		
 		super.update(delta);
 		
-		
+		if (mMouseDown) {
+			var clickPos = Vec2.get( mGameWorld.mouseX, mGameWorld.mouseY);
+			mHero.moveTo(clickPos);
+		}
 	}
 	
 }

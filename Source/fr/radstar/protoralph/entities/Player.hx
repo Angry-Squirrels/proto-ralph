@@ -20,6 +20,7 @@ class Player extends Pawn
 		super(GroupName.PLAYER);
 		
 		moveStrenght = 100;
+		speed = 150;
 		
 		graphics.beginFill(0x0055cc);
 		graphics.drawCircle(0, 0, 20);

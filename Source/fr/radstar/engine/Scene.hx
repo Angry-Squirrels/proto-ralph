@@ -10,6 +10,7 @@ class Scene extends Sprite
 	
 	var mEntities : EntityList;
 	var mEntitiesToRemove : Array<Entity>;
+	var mEntitesByGroup : Map<GroupName, Array<Entity>>;
 	
 	var mPaused : Bool;
 	
@@ -30,6 +31,7 @@ class Scene extends Sprite
 		
 		mEntities = new EntityList();
 		mEntitiesToRemove = new Array<Entity>();
+		mEntitesByGroup = new Map<GroupName, Array<Entity>>();
 		mPaused = true;
 		
 		mGuiLayer = new Sprite();
@@ -57,6 +59,10 @@ class Scene extends Sprite
 		}
 	}
 	
+	public function getEntitiesByGroup(group : GroupName) : Array<Entity> {
+		return mEntitesByGroup[group];
+	}
+	
 	public function update(delta : Float) {
 	}
 	
@@ -67,11 +73,20 @@ class Scene extends Sprite
 	public function add(ent : Entity) {
 		mEntities.add(ent);
 		mGameWorld.addChild(ent);
+		
+		if (mEntitesByGroup[ent.group] == null)
+			mEntitesByGroup[ent.group] = new Array<Entity>();
+		
+		var groupAr = mEntitesByGroup[ent.group];
+		groupAr.push(ent);
 	}
 	
 	public function remove(ent : Entity, free : Bool = true) {
 		ent.canFree = free;
 		mEntitiesToRemove.push(ent);
+		
+		var groupAr = mEntitesByGroup[ent.group];
+		groupAr.remove(ent);
 	}
 	
 	public function play() {
