@@ -23,4 +23,10 @@ class FistAoe extends AOE
 		graphics.drawCircle(0, 0, 10);
 	}
 	
+	override function onEntityDamaged(ent:Entity) 
+	{
+		var pushDir = ent.body.position.sub(mOwner.body.position);
+		ent.body.applyImpulse(pushDir.normalise().mul(250));
+		ent.vitZ += 25;
+	}
 }

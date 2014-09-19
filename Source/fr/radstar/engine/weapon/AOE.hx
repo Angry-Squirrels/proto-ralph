@@ -23,25 +23,27 @@ class AOE extends Entity implements IPoolable
 	var mLifeCounter : Float;
 	
 	var mFrequency : Float;
-	
 	var mOverlapping : BodyList;
-	
 	var mHitEntities : Map<Entity, Float>;
+	var mOwner : Entity;
 	
 	public function new() 
 	{
 		super();
 		
 		body = new Body(BodyType.STATIC);
+		mouseEnabled = false;
+		mouseChildren = false;
 	}
 	
-	public function init(damages:Float, lifeSpan:Float, group:GroupName, freq : Float):Void
+	public function init(damages:Float, lifeSpan:Float, owner : Entity, freq : Float):Void
 	{
 		mDamages = damages;
 		mLifeSpan = lifeSpan;
 		mFrequency = freq;
+		mOwner = owner;
 		
-		this.group = group;
+		this.group = owner.group;
 	}
 	
 	override public function reset():Void

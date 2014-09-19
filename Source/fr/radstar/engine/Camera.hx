@@ -40,7 +40,6 @@ class Camera extends Entity
 	}
 	
 	function onAdded(e : Event) {
-		
 		x = -parent.x + mPosX;
 		y = -parent.y + mPosY;
 	}

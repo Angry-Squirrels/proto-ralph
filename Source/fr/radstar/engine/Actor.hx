@@ -2,6 +2,7 @@ package fr.radstar.engine;
 import flash.display.BitmapData;
 import fr.radstar.engine.weapon.Weapon;
 import nape.constraint.Constraint;
+import nape.geom.Geom;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyType;
@@ -39,10 +40,8 @@ class Actor extends Entity
 	}
 	
 	public function attack(ent : Entity) {
-		if (weapon != null) {
-			lookAt(ent.body.position);
+		if (weapon != null) 
 			weapon.use();
-		}
 	}
 	
 	override public function update(delta : Float) {
@@ -52,6 +51,28 @@ class Actor extends Entity
 	
 	public function baseState(delta : Float) {
 		
+	}
+	
+	public function interractWith(ent : Entity) {
+		var targetBody : Body = ent.body;
+		
+		var closestTargetPoint = Vec2.get();
+		var closestPointOnMe = Vec2.get();
+		
+		var distance = Geom.distanceBody(body, targetBody, closestPointOnMe, closestTargetPoint);
+		
+		lookAt(closestTargetPoint);
+		
+		if (canAttack(ent)) {
+			if(weapon.range >= distance)
+				attack(ent);
+			else {
+				var inRangePos : Vec2 = body.position.sub(closestTargetPoint);
+				inRangePos.length = weapon.range;
+				inRangePos = closestTargetPoint.add(inRangePos);
+				moveTo(inRangePos);
+			}
+		}
 	}
 	
 	public function lookAt(pos : Vec2) {
@@ -89,7 +110,7 @@ class Actor extends Entity
 	}
 	
 	public function canAttack(ent : Entity) : Bool{
-		return ent.group != group && ent.group != GroupName.ENVIRONMENT && weapon.inRange(ent.body.position);
+		return ent.group != group && ent.group != GroupName.ENVIRONMENT;
 	}
 	
 	public function equip(w: Weapon) {

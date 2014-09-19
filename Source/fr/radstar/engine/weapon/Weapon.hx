@@ -25,8 +25,4 @@ class Weapon extends Sprite
 	{
 		
 	}
-	
-	public function inRange(pos : Vec2) {
-		return pos.sub(owner.body.position).length <= range;
-	}
 }

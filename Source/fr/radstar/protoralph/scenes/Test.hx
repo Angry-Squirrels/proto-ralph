@@ -79,13 +79,8 @@ class Test extends Scene
 		
 		if (Std.is(e.target, Entity))
 		{
-			
 			var ent : Entity = e.target;
-			
-			if (mHero.canAttack(ent)) 
-				mHero.attack(ent);
-			else
-				mHero.moveTo(clickPos);
+			mHero.interractWith(ent);
 		}
 		else
 			mHero.moveTo(clickPos);

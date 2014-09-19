@@ -37,7 +37,6 @@ class Engine extends Sprite
 		
 		#if debug
 		mDebug = new BitmapDebug(Lib.current.stage.stageWidth, Lib.current.stage.stageHeight, 0, true);
-		addChild(mDebug.display);
 		#end
 		
 		mLastTime = Lib.getTimer();
@@ -62,6 +61,8 @@ class Engine extends Sprite
 		
 		#if debug
 		mDebug.clear();
+		mDebug.transform.tx = mCurrentScene.getGameWorld().x;
+		mDebug.transform.ty = mCurrentScene.getGameWorld().y;
 		//mDebug.draw(mSpace);
 		mDebug.flush();
 		#end
@@ -77,6 +78,7 @@ class Engine extends Sprite
 		mSpace.clear();
 		mCurrentScene = scene;
 		addChild(mCurrentScene);
+		addChild(mDebug.display);
 		mCurrentScene.play();
 	}
 	

@@ -23,10 +23,10 @@ class Scene extends Sprite
 		super();
 		
 		mCamera = new Camera(0,0);
-		addChild(mCamera);
 		
 		mGameWorld = new Sprite();
 		addChild(mGameWorld);
+		mGameWorld.addChild(mCamera);
 		
 		mEntities = new EntityList();
 		mEntitiesToRemove = new Array<Entity>();
@@ -58,6 +58,10 @@ class Scene extends Sprite
 	}
 	
 	public function update(delta : Float) {
+	}
+	
+	public function getGameWorld() : Sprite {
+		return mGameWorld;
 	}
 	
 	public function add(ent : Entity) {

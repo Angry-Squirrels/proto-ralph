@@ -25,7 +25,9 @@ class Entity extends Sprite implements IPoolable
 	public var pivotX : Float;
 	public var pivotY : Float;
 	
-	public var friction : Float = 0.3;
+	public var friction : Float = 0.25;
+	public var posZ : Float = 0;
+	public var vitZ : Float = 0;
 	
 	public var canFree : Bool;
 	
@@ -54,6 +56,10 @@ class Entity extends Sprite implements IPoolable
 	{
 		pivotX = 0;
 		pivotY = 0;
+		posZ = 0;
+		vitZ = 0;
+		
+		name = "Entity";
 		
 		next = null;
 		prev = null;
@@ -87,12 +93,22 @@ class Entity extends Sprite implements IPoolable
 	}
 	
 	public function updatePhysic(delta : Float) {
+		
+		vitZ -= 980 * delta;
+		posZ += vitZ;
+		
+		if (posZ <= 0) {
+			posZ = 0;
+			vitZ = 0;
+		}
+		
 		if (mBody != null) {
 			x = mBody.position.x - pivotX;
 			y = mBody.position.y - pivotY;
+			
 			rotation = mBody.rotation * 180 / Math.PI;
 			
-			if(mBody.velocity.length > 0.0001 || mBody.angularVel > 0.001){
+			if ((mBody.velocity.length > 0.0001 || mBody.angularVel > 0.001) && posZ == 0) {
 				mBody.applyImpulse(mBody.velocity.mul( -1 * friction));
 				mBody.angularVel *= friction;
 			}
